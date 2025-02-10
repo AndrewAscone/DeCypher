@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class CipherController {
+
     private final CipherService cipherService;
 
     public CipherController(CipherService cipherService){
@@ -20,13 +21,13 @@ public class CipherController {
 
     @PostMapping("/encrypt")
     public ResponseEntity<EncryptionResponse> encrypt(@RequestBody EncryptionRequest request){
-        String result = cipherService.encrypt(request.getText(), request.getCipher());
+        String result = cipherService.encrypt(request.getText(), request.getCipher(), request.getShift());
         return ResponseEntity.ok(new EncryptionResponse(result, request.getCipher()));
     }
 
     @PostMapping("/decrypt")
     public ResponseEntity<EncryptionResponse> decrypt(@RequestBody EncryptionRequest request){
-        String result = cipherService.decrypt(request.getText(), request.getCipher());
+        String result = cipherService.decrypt(request.getText(), request.getCipher(), request.getShift());
         return ResponseEntity.ok(new EncryptionResponse(result, request.getCipher()));
     }
 }
