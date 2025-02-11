@@ -44,4 +44,33 @@ public enum CipherType {
     }
 
     //Vigenere cipher encrypt/decrypt
+    private static String vigenereEncrypt(String text, int keyAsInt){
+        String key = String.valueOf(keyAsInt);
+        return processVigenere(text, key, true);
+    }
+
+    private static String vigenereDecrypt(String text, int keyAsInt){
+        String key = String.valueOf(keyAsInt);
+        return processVigenere(text, key, false);
+    }
+
+    private static String processVigenere(String text, String key, boolean encrypt){
+        StringBuilder result = new StringBuilder();
+        key = key.toUpperCase();
+        int keyIndex = 0;
+
+        for(char ch : text.toCharArray()){
+            if(Character.isLetter(ch)){
+                char base = Character.isUpperCase(ch) ? 'A' : 'a';
+                int shift = key.charAt(keyIndex % key.length()) - 'A';
+                if(!encrypt) shift = -shift;
+                result.append((char) ((ch - base + shift + 26) % 26 + base));
+                keyIndex++;
+            } else {
+                result.append(ch);
+            }
+        }
+
+        return result.toString();
+    }
 }
