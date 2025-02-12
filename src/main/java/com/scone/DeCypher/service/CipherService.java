@@ -1,43 +1,28 @@
 package com.scone.DeCypher.service;
 
+import com.scone.DeCypher.model.CipherType;
 import org.springframework.stereotype.Service;
+
+import javax.crypto.Cipher;
 
 @Service
 public class CipherService {
 
-    public String encrypt(String text, String cipher, int shift){
-        if("caesar".equalsIgnoreCase(cipher)){
-            return caesarEncrypt(text, shift);
+    public String encrypt(String text, String cipher, int shift, String key){
+        try {
+            CipherType cipherType = CipherType.valueOf(cipher.toUpperCase());
+            return cipherType.encrypt(text, shift);
+        } catch (IllegalArgumentException e){
+                throw new IllegalArgumentException("Unsupported cipher type: " + cipher);
         }
-
-        return text;
     }
 
-    public String decrypt(String text, String cipher, int shift){
-        if("caesar".equalsIgnoreCase(cipher)){
-            return caesarDecrypt(text, shift);
+    public String decrypt(String text, String cipher, int shift, String key){
+        try{
+            CipherType cipherType = CipherType.valueOf(cipher.toUpperCase());
+            return cipherType.decrypt(text, shift);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Unsupported cipher type: " + cipher);
         }
-
-        return text;
-    }
-
-    private String caesarEncrypt(String text, int shift){
-        StringBuilder result = new StringBuilder();
-        shift = shift % 26;
-
-        for(char ch : text.toCharArray()){
-            if(Character.isLetter(ch)){
-                char base = Character.isUpperCase(ch) ? 'A' : 'a';
-                result.append((char)((ch - base + shift) % 26 + base));
-            } else{
-              result.append(ch);
-            }
-        }
-
-        return result.toString();
-    }
-
-    private String caesarDecrypt(String text, int shift){
-        return caesarEncrypt(text, 26 - (shift % 26));
     }
 }
