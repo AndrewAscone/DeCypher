@@ -11,7 +11,7 @@ public class CipherService {
     public String encrypt(String text, String cipher, int shift, String key){
         try {
             CipherType cipherType = CipherType.valueOf(cipher.toUpperCase());
-            return cipherType.encrypt(text, shift);
+            return cipherType.encrypt(text, cipher.equalsIgnoreCase("caesar"));
         } catch (IllegalArgumentException e){
                 throw new IllegalArgumentException("Unsupported cipher type: " + cipher);
         }
