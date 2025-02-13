@@ -1,5 +1,7 @@
 package com.scone.DeCypher.model;
 
+import com.scone.DeCypher.util.CipherKeyValidator;
+
 import java.util.function.BiFunction;
 
 public enum CipherType {
@@ -15,17 +17,18 @@ public enum CipherType {
     }
 
     public String encrypt(String text, String key){
-        return encryptFunction.apply(text, key);
+        return encryptFunction.apply(text, CipherKeyValidator.validateKey(this, key));
     }
 
     public String decrypt(String text, String key){
-        return decryptFunction.apply(text, key);
+        return decryptFunction.apply(text, CipherKeyValidator.validateKey(this, key));
     }
 
     //Caesar cipher encrypt/decrypt
     private static String caesarEncrypt(String text, String shiftString){
         StringBuilder result = new StringBuilder();
         int shift = Integer.parseInt(shiftString);
+        shift = shift % 26;
 
         for(char ch : text.toCharArray()){
             if(Character.isLetter(ch)){
