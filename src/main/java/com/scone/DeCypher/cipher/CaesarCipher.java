@@ -3,17 +3,24 @@ package com.scone.DeCypher.cipher;
 public class CaesarCipher implements Cipher{
     @Override
     public String encrypt(String text, String key) {
-        return "";
+        int shift = Integer.parseInt(key);
+        return shiftText(text, shift);
     }
 
     @Override
     public String decrypt(String text, String key) {
-        return "";
+        int shift = Integer.parseInt(key);
+        return shiftText(text, -shift);
     }
 
     @Override
     public boolean isValidKey(String key) {
-        return false;
+        try {
+            int shift = Integer.parseInt(key);
+            return shift >= 0;
+        } catch (NumberFormatException e){
+            return false;
+        }
     }
 
     private String shiftText(String text, int shift){
