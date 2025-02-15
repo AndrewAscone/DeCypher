@@ -11,15 +11,15 @@ public class VigenereCipher implements Cipher{
         key = formatKey(text, key);
 
         for (int i = 0; i < text.length(); i++) {
-            char textChar = text.charAt(i);
-            char keyChar = key.charAt(i);
+            char nextTextChar = text.charAt(i);
+            char nextKeyChar = key.charAt(i);
 
-            if(Character.isLetter(textChar)){
-                char base = Character.isUpperCase(textChar) ? 'A' : 'a';
-                int shift = keyChar - base;
-                encryptedText.append((char) ((textChar - base + shift) % 26 + base));
+            if(Character.isLetter(nextTextChar)){
+                char base = Character.isUpperCase(nextTextChar) ? 'A' : 'a';
+                int shift = nextKeyChar - base;
+                encryptedText.append((char) ((nextTextChar - base + shift) % 26 + base));
             } else {
-                encryptedText.append(textChar);
+                encryptedText.append(nextTextChar);
             }
         }
 
@@ -28,7 +28,27 @@ public class VigenereCipher implements Cipher{
 
     @Override
     public String decrypt(String text, String key) {
-        return "";
+        if(!isValidKey(key)){
+            throw new IllegalArgumentException("Invalid key for Vigenère cipher. The key must contain only letters.");
+        }
+
+        StringBuilder decryptedText = new StringBuilder();
+        key = formatKey(text, key);
+
+        for (int i = 0; i < text.length(); i++) {
+            char nextTextChar = text.charAt(i);
+            char nextKeyChar = key.charAt(i);
+
+            if(Character.isLetter(nextTextChar)){
+                char base = Character.isUpperCase(nextTextChar) ? 'A' : 'a';
+                int shift = nextKeyChar - base;
+                decryptedText.append((char) ((nextTextChar - base - shift + 26) % 26 + base));
+            } else {
+                decryptedText.append(nextTextChar);
+            }
+        }
+
+        return decryptedText.toString();
     }
 
     @Override
