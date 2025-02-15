@@ -3,7 +3,27 @@ package com.scone.DeCypher.cipher;
 public class VigenereCipher implements Cipher{
     @Override
     public String encrypt(String text, String key) {
-        return "";
+        if(!isValidKey(key)){
+            throw new IllegalArgumentException("Invalid key for Vigenère cipher. The key must contain only letters.");
+        }
+
+        StringBuilder encryptedText = new StringBuilder();
+        key = formatKey(text, key);
+
+        for (int i = 0; i < text.length(); i++) {
+            char textChar = text.charAt(i);
+            char keyChar = key.charAt(i);
+
+            if(Character.isLetter(textChar)){
+                char base = Character.isUpperCase(textChar) ? 'A' : 'a';
+                int shift = keyChar - base;
+                encryptedText.append((char) ((textChar - base + shift) % 26 + base));
+            } else {
+                encryptedText.append(textChar);
+            }
+        }
+
+        return encryptedText.toString();
     }
 
     @Override
