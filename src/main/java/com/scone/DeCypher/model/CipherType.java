@@ -1,78 +1,35 @@
 package com.scone.DeCypher.model;
 
-import com.scone.DeCypher.util.CipherKeyValidator;
-
-import java.util.function.BiFunction;
+import com.scone.DeCypher.cipher.CaesarCipher;
+import com.scone.DeCypher.cipher.Cipher;
+import com.scone.DeCypher.cipher.VigenereCipher;
 
 public enum CipherType {
-    CAESAR(CipherType::caesarEncrypt, CipherType::caesarDecrypt),
-    VIGENERE(CipherType::vigenereEncrypt, CipherType::vigenereDecrypt);
+    CAESAR("caesar", CaesarCipher.class),
+    VIGENERE("vigenere", VigenereCipher.class);
 
-    private final BiFunction<String, String, String> encryptFunction;
-    private final BiFunction<String, String, String> decryptFunction;
+    private final String name;
+    private final Class<? extends Cipher> cipherClass;
 
-    CipherType(BiFunction<String, String, String> encryptFunction, BiFunction<String, String, String> decryptFunction){
-        this.encryptFunction = encryptFunction;
-        this.decryptFunction = decryptFunction;
+    CipherType(String name, Class<? extends Cipher> cipherClass){
+        this.name = name;
+        this.cipherClass = cipherClass;
     }
 
-    public String encrypt(String text, String key){
-        return encryptFunction.apply(text, CipherKeyValidator.validateKey(this, key));
+    public String getName(){
+        return name;
     }
 
-    public String decrypt(String text, String key){
-        return decryptFunction.apply(text, CipherKeyValidator.validateKey(this, key));
+    public Class<? extends Cipher> getCipherClass(){
+        return cipherClass;
     }
 
-    //Caesar cipher encrypt/decrypt
-    private static String caesarEncrypt(String text, String shiftString){
-        StringBuilder result = new StringBuilder();
-        int shift = Integer.parseInt(shiftString);
-        shift = shift % 26;
-
-        for(char ch : text.toCharArray()){
-            if(Character.isLetter(ch)){
-                char base = Character.isUpperCase(ch) ? 'A' : 'a';
-                result.append((char) ((ch - base + shift) % 26 + base));
-            } else {
-                result.append(ch);
+    public static CipherType fromString(String name){
+        for(CipherType type : values()){
+            if(type.name.equalsIgnoreCase(name)){
+                return type;
             }
         }
-
-        return result.toString();
-    }
-
-    private static String caesarDecrypt(String text, String shiftString){
-        int shift = Integer.parseInt(shiftString);
-        return caesarEncrypt(text, String.valueOf(26 - (shift % 26)));
-    }
-
-    //Vigenere cipher encrypt/decrypt
-    private static String vigenereEncrypt(String text, String key){
-        return processVigenere(text, key, true);
-    }
-
-    private static String vigenereDecrypt(String text, String key){
-        return processVigenere(text, key, false);
-    }
-
-    private static String processVigenere(String text, String key, boolean encrypt){
-        StringBuilder result = new StringBuilder();
-        key = key.toUpperCase();
-        int keyIndex = 0;
-
-        for(char ch : text.toCharArray()){
-            if(Character.isLetter(ch)){
-                char base = Character.isUpperCase(ch) ? 'A' : 'a';
-                int shift = key.charAt(keyIndex % key.length()) - 'A';
-                if(!encrypt) shift = -shift;
-                result.append((char) ((ch - base + shift + 26) % 26 + base));
-                keyIndex++;
-            } else {
-                result.append(ch);
-            }
-        }
-
-        return result.toString();
+        throw new IllegalArgumentException("Unsupported cipher type: " + name);
     }
 }
