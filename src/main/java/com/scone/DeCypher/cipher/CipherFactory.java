@@ -13,6 +13,7 @@ public class CipherFactory {
     public CipherFactory() {
         cipherInstances.put(CipherType.CAESAR, new CaesarCipher());
         cipherInstances.put(CipherType.VIGENERE, new VigenereCipher());
+        cipherInstances.put(CipherType.ATBASH, new AtbashCipher());
     }
 
     public Cipher getCipher(String cipherName){
