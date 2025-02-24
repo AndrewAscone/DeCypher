@@ -21,13 +21,13 @@ public class CipherController {
 
     @PostMapping("/encrypt")
     public ResponseEntity<EncryptionResponse> encrypt(@RequestBody EncryptionRequest request){
-        String result = cipherService.encrypt(request.getText(), request.getCipher(), request.getShift(), request.getKey());
+        String result = cipherService.encrypt(request.getText(), request.getCipher(), request.getKey());
         return ResponseEntity.ok(new EncryptionResponse(result, request.getCipher()));
     }
 
     @PostMapping("/decrypt")
     public ResponseEntity<EncryptionResponse> decrypt(@RequestBody EncryptionRequest request){
-        String result = cipherService.decrypt(request.getText(), request.getCipher(), request.getShift(), request.getKey());
+        String result = cipherService.decrypt(request.getText(), request.getCipher(), request.getKey());
         return ResponseEntity.ok(new EncryptionResponse(result, request.getCipher()));
     }
 }

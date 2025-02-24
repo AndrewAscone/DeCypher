@@ -3,17 +3,15 @@ package com.scone.DeCypher.model;
 public class EncryptionRequest {
     private String text;
     private String cipher;
-    private int shift; // Used with Caesar
-    private String key; // Used with Vigenère
+    private String key;
 
     public EncryptionRequest(){
 
     }
 
-    public EncryptionRequest(String text, String cipher, int shift, String key){
+    public EncryptionRequest(String text, String cipher, String key){
         this.text = text;
         this.cipher = cipher;
-        this.shift = shift;
         this.key = key;
     }
 
@@ -33,13 +31,6 @@ public class EncryptionRequest {
         this.cipher = cipher;
     }
 
-    public int getShift() {
-        return shift;
-    }
-
-    public void setShift(int shift) {
-        this.shift = shift;
-    }
 
     public String getKey() {
         return key;
