@@ -3,12 +3,20 @@ package com.scone.DeCypher.cipher;
 public class CaesarCipher implements Cipher{
     @Override
     public String encrypt(String text, String key) {
+        if(!isValidKey(key)){
+            throw new IllegalArgumentException("Invalid key for Caesar cipher. Key must be a non-negative integer.");
+        }
+
         int shift = Integer.parseInt(key);
         return shiftText(text, shift);
     }
 
     @Override
     public String decrypt(String text, String key) {
+        if(!isValidKey(key)){
+            throw new IllegalArgumentException("Invalid key for Caesar cipher. Key must be a non-negative integer.");
+        }
+
         int shift = Integer.parseInt(key);
         return shiftText(text, -shift);
     }
@@ -17,9 +25,9 @@ public class CaesarCipher implements Cipher{
     public boolean isValidKey(String key) {
         try {
             int shift = Integer.parseInt(key);
-            return shift >= 0;
+            return shift >= 0; // Ensure key is a non-negative integer
         } catch (NumberFormatException e){
-            return false;
+            return false; // Key is not a valid integer
         }
     }
 
