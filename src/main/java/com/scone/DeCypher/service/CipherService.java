@@ -16,10 +16,10 @@ public class CipherService {
     }
 
     public String encrypt(String text, String cipher, String key){
-        return cipherFactory.getCipher(cipher).encrypt(text, key);
+        return cipherFactory.getCipher(cipher, key).encrypt(text);
     }
 
     public String decrypt(String text, String cipher, String key){
-        return cipherFactory.getCipher(cipher).decrypt(text, key);
+        return cipherFactory.getCipher(cipher, key).decrypt(text);
     }
 }

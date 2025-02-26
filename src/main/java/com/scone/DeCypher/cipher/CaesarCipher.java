@@ -1,9 +1,15 @@
 package com.scone.DeCypher.cipher;
 
 public class CaesarCipher implements Cipher{
+    private String key;
+
+    public CaesarCipher(String key){
+        this.key = key;
+    }
+
     @Override
-    public String encrypt(String text, String key) {
-        if(!isValidKey(key)){
+    public String encrypt(String text) {
+        if(!isValidKey()){
             throw new IllegalArgumentException("Invalid key for Caesar cipher. Key must be a non-negative integer.");
         }
 
@@ -12,8 +18,8 @@ public class CaesarCipher implements Cipher{
     }
 
     @Override
-    public String decrypt(String text, String key) {
-        if(!isValidKey(key)){
+    public String decrypt(String text) {
+        if(!isValidKey()){
             throw new IllegalArgumentException("Invalid key for Caesar cipher. Key must be a non-negative integer.");
         }
 
@@ -22,7 +28,7 @@ public class CaesarCipher implements Cipher{
     }
 
     @Override
-    public boolean isValidKey(String key) {
+    public boolean isValidKey() {
         try {
             int shift = Integer.parseInt(key);
             return shift >= 0; // Ensure key is a non-negative integer

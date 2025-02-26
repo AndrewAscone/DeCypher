@@ -1,18 +1,23 @@
 package com.scone.DeCypher.cipher;
 
 public class AtbashCipher implements Cipher{
+
+    public AtbashCipher(){
+
+    }
+
     @Override
-    public String encrypt(String text, String key) {
+    public String encrypt(String text) {
         return transform(text);
     }
 
     @Override
-    public String decrypt(String text, String key) {
+    public String decrypt(String text) {
         return transform(text); // Atbash is self-inverse, encryption and decryption are identical
     }
 
     @Override
-    public boolean isValidKey(String key) {
+    public boolean isValidKey() {
         return true; // No key required for Atbash
     }
 

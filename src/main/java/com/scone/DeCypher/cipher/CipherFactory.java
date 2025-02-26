@@ -5,24 +5,26 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Component
 public class CipherFactory {
-    private final Map<CipherType, Cipher> cipherInstances = new HashMap<>();
+    private final Map<CipherType, Function<String, Cipher>> cipherConstructors = new HashMap<>();
 
     public CipherFactory() {
-        cipherInstances.put(CipherType.CAESAR, new CaesarCipher());
-        cipherInstances.put(CipherType.VIGENERE, new VigenereCipher());
-        cipherInstances.put(CipherType.ATBASH, new AtbashCipher());
+        cipherConstructors.put(CipherType.CAESAR, CaesarCipher::new);
+        cipherConstructors.put(CipherType.VIGENERE, VigenereCipher::new);
+        cipherConstructors.put(CipherType.ATBASH, key -> new AtbashCipher());
     }
 
-    public Cipher getCipher(String cipherName){
+    public Cipher getCipher(String cipherName, String key){
         CipherType type = CipherType.fromString(cipherName);
-        Cipher cipher = cipherInstances.get(type);
-        if(cipher == null) {
+        Function<String, Cipher> constructor = cipherConstructors.get(type);
+
+        if(constructor == null) {
             throw new IllegalArgumentException("Cipher not found: " + cipherName);
         }
 
-        return cipher;
+        return constructor.apply(key);
     }
 }

@@ -1,0 +1,2 @@
+BouncyCastle (add to POM, encryption library)
+AES (class to instantiate with BouncyCastle dependency)

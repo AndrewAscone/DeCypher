@@ -1,14 +1,20 @@
 package com.scone.DeCypher.cipher;
 
 public class VigenereCipher implements Cipher{
+    private String key;
+
+    public VigenereCipher(String key){
+        this.key = key;
+    }
+
     @Override
-    public String encrypt(String text, String key) {
-        if(!isValidKey(key)){
+    public String encrypt(String text) {
+        if(!isValidKey()){
             throw new IllegalArgumentException("Invalid key for Vigenère cipher. The key must contain only letters.");
         }
 
         StringBuilder encryptedText = new StringBuilder();
-        key = formatKey(text, key);
+        key = formatKey(text);
 
         for (int i = 0; i < text.length(); i++) {
             char nextTextChar = text.charAt(i);
@@ -27,13 +33,13 @@ public class VigenereCipher implements Cipher{
     }
 
     @Override
-    public String decrypt(String text, String key) {
-        if(!isValidKey(key)){
+    public String decrypt(String text) {
+        if(!isValidKey()){
             throw new IllegalArgumentException("Invalid key for Vigenère cipher. The key must contain only letters.");
         }
 
         StringBuilder decryptedText = new StringBuilder();
-        key = formatKey(text, key);
+        key = formatKey(text);
 
         for (int i = 0; i < text.length(); i++) {
             char nextTextChar = text.charAt(i);
@@ -52,11 +58,11 @@ public class VigenereCipher implements Cipher{
     }
 
     @Override
-    public boolean isValidKey(String key) {
+    public boolean isValidKey() {
         return key != null && key.matches("[A-Za-z]+"); // Regex here means 'Only letters, at least one character'
     }
 
-    private String formatKey(String text, String key){
+    private String formatKey(String text){
         StringBuilder formattedKey = new StringBuilder();
         int keyLength = key.length();
         int textLength = text.length();
