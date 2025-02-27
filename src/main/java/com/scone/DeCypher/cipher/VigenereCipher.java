@@ -1,6 +1,6 @@
 package com.scone.DeCypher.cipher;
 
-public class VigenereCipher implements Cipher{
+public class VigenereCipher implements EncryptionCipher {
     private String key;
 
     public VigenereCipher(String key){

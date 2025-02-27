@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 @Component
 public class CipherFactory {
-    private final Map<CipherType, Function<String, Cipher>> cipherConstructors = new HashMap<>();
+    private final Map<CipherType, Function<String, EncryptionCipher>> cipherConstructors = new HashMap<>();
 
     public CipherFactory() {
         cipherConstructors.put(CipherType.CAESAR, CaesarCipher::new);
@@ -17,9 +17,9 @@ public class CipherFactory {
         cipherConstructors.put(CipherType.ATBASH, key -> new AtbashCipher());
     }
 
-    public Cipher getCipher(String cipherName, String key){
+    public EncryptionCipher getCipher(String cipherName, String key){
         CipherType type = CipherType.fromString(cipherName);
-        Function<String, Cipher> constructor = cipherConstructors.get(type);
+        Function<String, EncryptionCipher> constructor = cipherConstructors.get(type);
 
         if(constructor == null) {
             throw new IllegalArgumentException("Cipher not found: " + cipherName);

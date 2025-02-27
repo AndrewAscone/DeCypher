@@ -1,6 +1,6 @@
 package com.scone.DeCypher.cipher;
 
-public class AtbashCipher implements Cipher{
+public class AtbashCipher implements EncryptionCipher {
 
     public AtbashCipher(){
 

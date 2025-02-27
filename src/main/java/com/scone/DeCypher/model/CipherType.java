@@ -2,7 +2,7 @@ package com.scone.DeCypher.model;
 
 import com.scone.DeCypher.cipher.AtbashCipher;
 import com.scone.DeCypher.cipher.CaesarCipher;
-import com.scone.DeCypher.cipher.Cipher;
+import com.scone.DeCypher.cipher.EncryptionCipher;
 import com.scone.DeCypher.cipher.VigenereCipher;
 
 public enum CipherType {
@@ -11,9 +11,9 @@ public enum CipherType {
     ATBASH("atbash", AtbashCipher.class);
 
     private final String name;
-    private final Class<? extends Cipher> cipherClass;
+    private final Class<? extends EncryptionCipher> cipherClass;
 
-    CipherType(String name, Class<? extends Cipher> cipherClass){
+    CipherType(String name, Class<? extends EncryptionCipher> cipherClass){
         this.name = name;
         this.cipherClass = cipherClass;
     }
@@ -22,7 +22,7 @@ public enum CipherType {
         return name;
     }
 
-    public Class<? extends Cipher> getCipherClass(){
+    public Class<? extends EncryptionCipher> getCipherClass(){
         return cipherClass;
     }
 

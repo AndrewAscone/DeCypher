@@ -3,7 +3,7 @@ package com.scone.DeCypher.cipher;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
-public class AESCipher implements Cipher{
+public class AESCipher implements EncryptionCipher {
     private final byte[] key;
     private final byte[] iv;
 
@@ -42,7 +42,9 @@ public class AESCipher implements Cipher{
         throw new IllegalArgumentException("AES key must be exactly 16 bytes (128-bit).");
     }
 
-    private byte[] processData(byte[] input, boolean encrypt){
-        return null;
+    private String processCipher(String text, int mode){
+        try{
+
+        }
     }
 }

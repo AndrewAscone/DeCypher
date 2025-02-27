@@ -1,6 +1,6 @@
 package com.scone.DeCypher.cipher;
 
-public class CaesarCipher implements Cipher{
+public class CaesarCipher implements EncryptionCipher {
     private String key;
 
     public CaesarCipher(String key){
