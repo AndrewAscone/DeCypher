@@ -1,14 +1,12 @@
 package com.scone.DeCypher.model;
 
-import com.scone.DeCypher.cipher.AtbashCipher;
-import com.scone.DeCypher.cipher.CaesarCipher;
-import com.scone.DeCypher.cipher.EncryptionCipher;
-import com.scone.DeCypher.cipher.VigenereCipher;
+import com.scone.DeCypher.cipher.*;
 
 public enum CipherType {
     CAESAR("caesar", CaesarCipher.class),
     VIGENERE("vigenere", VigenereCipher.class),
-    ATBASH("atbash", AtbashCipher.class);
+    ATBASH("atbash", AtbashCipher.class),
+    AES("AES", AESCipher.class);
 
     private final String name;
     private final Class<? extends EncryptionCipher> cipherClass;
