@@ -61,7 +61,7 @@ public class AESCipher implements EncryptionCipher {
         throw new IllegalArgumentException("AES key must be exactly 16 bytes (128-bit).");
     }
 
-    private String processCipher(String text, int mode){
+    private String processCipher(String text, int mode, byte[] iv){
         try{
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "BC");
             SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
