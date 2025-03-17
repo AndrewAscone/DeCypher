@@ -21,7 +21,7 @@ public class AESCipher implements EncryptionCipher {
 
         //Concatenate IV + encrypted data and encode in Base64
         byte[] combined = new byte[iv.length + Base64.getDecoder().decode(encryptedText).length];
-        System.arraycopy(iv, 0, combined, iv.length);
+        System.arraycopy(iv, 0, combined, 0, iv.length);
         System.arraycopy(Base64.getDecoder().decode(encryptedText), 0, combined, iv.length, combined.length - iv.length);
 
         return Base64.getEncoder().encodeToString(combined);
