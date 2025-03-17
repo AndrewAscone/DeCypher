@@ -29,7 +29,16 @@ public class AESCipher implements EncryptionCipher {
 
     @Override
     public String decrypt(String text) {
+        byte[] decodedBytes = Base64.getDecoder().decode(text);
 
+        // Extract IV (first 16 bytes) and Ciphertext (remaining bytes)
+        byte[] iv = new byte[16];
+        byte[] encryptedData = new byte[decodedBytes.length - 16];
+
+        System.arraycopy(decodedBytes, 0, iv, 0, 16);
+        System.arraycopy(decodedBytes, 16, encryptedData, 0, encryptedData.length);
+
+        return processCipher(Base64.getEncoder().encodeToString(encryptedData), Cipher.DECRYPT_MODE, iv);
     }
 
     @Override
