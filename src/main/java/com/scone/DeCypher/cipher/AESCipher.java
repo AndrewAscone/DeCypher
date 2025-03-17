@@ -9,21 +9,27 @@ import java.util.Base64;
 
 public class AESCipher implements EncryptionCipher {
     private final byte[] key;
-    private final byte[] iv;
 
     public AESCipher(String key){
         this.key = validateAndFormatKey(key);
-        this.iv = generateIV();
     }
 
     @Override
     public String encrypt(String text) {
-        return processCipher(text, Cipher.ENCRYPT_MODE);
+        byte[] iv = generateIV(); // Generate new IV for each encryption
+        String encryptedText = processCipher(text, Cipher.ENCRYPT_MODE, iv);
+
+        //Concatenate IV + encrypted data and encode in Base64
+        byte[] combined = new byte[iv.length + Base64.getDecoder().decode(encryptedText).length];
+        System.arraycopy(iv, 0, combined, iv.length);
+        System.arraycopy(Base64.getDecoder().decode(encryptedText), 0, combined, iv.length, combined.length - iv.length);
+
+        return Base64.getEncoder().encodeToString(combined);
     }
 
     @Override
     public String decrypt(String text) {
-        return processCipher(text, Cipher.DECRYPT_MODE);
+
     }
 
     @Override
