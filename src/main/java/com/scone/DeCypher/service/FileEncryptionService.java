@@ -1,11 +1,14 @@
 package com.scone.DeCypher.service;
 
 import com.scone.DeCypher.cipher.CipherFactory;
+import com.scone.DeCypher.cipher.EncryptionCipher;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Base64;
 
 @Service
 public class FileEncryptionService {
@@ -24,6 +27,27 @@ public class FileEncryptionService {
     }
 
     private File processFile(MultipartFile file, String cipherName, String key, boolean encrypt) throws IOException{
+        EncryptionCipher cipher = cipherFactory.getCipher(cipherName, key);
 
+        //Create a temp file for output
+        String suffix = encrypt ? ".enc" : ".dec";
+        Path tempFile = Files.createTempFile("encrypted_", suffix);
+
+        try(InputStream inputStream = file.getInputStream();
+            OutputStream outputStream = new FileOutputStream(tempFile.toFile())){
+
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+
+            while((bytesRead = inputStream.read(buffer)) != -1){
+                byte[] processedBytes = encrypt
+                        ? cipher.encrypt(Base64.getEncoder().encodeToString(buffer, 0, bytesRead)).getBytes()
+                        : Base64.getDecoder().decode(cipher.decrypt(new String(buffer, 0, bytesRead)));
+
+                outputStream.write(processedBytes);
+            }
+        }
+
+        return tempFile.toFile();
     }
 }
