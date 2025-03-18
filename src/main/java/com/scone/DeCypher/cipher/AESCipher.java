@@ -17,12 +17,12 @@ public class AESCipher implements EncryptionCipher {
     @Override
     public String encrypt(String text) {
         byte[] iv = generateIV(); // Generate new IV for each encryption
-        String encryptedText = processCipher(text, Cipher.ENCRYPT_MODE, iv);
+        byte[] encryptedData = processCipher(text.getBytes(StandardCharsets.UTF_8), Cipher.ENCRYPT_MODE, iv);
 
         //Concatenate IV + encrypted data and encode in Base64
-        byte[] combined = new byte[iv.length + Base64.getDecoder().decode(encryptedText).length];
+        byte[] combined = new byte[iv.length + encryptedData.length];
         System.arraycopy(iv, 0, combined, 0, iv.length);
-        System.arraycopy(Base64.getDecoder().decode(encryptedText), 0, combined, iv.length, combined.length - iv.length);
+        System.arraycopy(encryptedData, 0, combined, iv.length, encryptedData.length);
 
         return Base64.getEncoder().encodeToString(combined);
     }
@@ -38,7 +38,8 @@ public class AESCipher implements EncryptionCipher {
         System.arraycopy(decodedBytes, 0, iv, 0, 16);
         System.arraycopy(decodedBytes, 16, encryptedData, 0, encryptedData.length);
 
-        return processCipher(Base64.getEncoder().encodeToString(encryptedData), Cipher.DECRYPT_MODE, iv);
+        byte[] decryptedBytes = processCipher(encryptedData, Cipher.DECRYPT_MODE, iv);
+        return new String(decryptedBytes, StandardCharsets.UTF_8); // Convert bytes back to string
     }
 
     @Override
@@ -61,19 +62,13 @@ public class AESCipher implements EncryptionCipher {
         throw new IllegalArgumentException("AES key must be exactly 16 bytes (128-bit).");
     }
 
-    private String processCipher(String text, int mode, byte[] iv){
+    private byte[] processCipher(byte[] inputBytes, int mode, byte[] iv){
         try{
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "BC");
             SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
             cipher.init(mode, secretKeySpec, new IvParameterSpec(iv));
 
-            byte[] outputBytes = (mode == Cipher.ENCRYPT_MODE) ?
-                    cipher.doFinal(text.getBytes(StandardCharsets.UTF_8)) :
-                    cipher.doFinal(Base64.getDecoder().decode(text));
-
-            return (mode == Cipher.ENCRYPT_MODE) ?
-                    Base64.getEncoder().encodeToString(outputBytes) :
-                    new String(outputBytes, StandardCharsets.UTF_8);
+            return cipher.doFinal(inputBytes);
         } catch (Exception e) {
             throw new RuntimeException("AES processing failed", e);
         }
