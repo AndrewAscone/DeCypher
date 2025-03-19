@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Base64;
 
 @Service
@@ -41,8 +43,8 @@ public class FileEncryptionService {
 
             while((bytesRead = inputStream.read(buffer)) != -1){
                 byte[] processedBytes = encrypt
-                        ? cipher.encrypt(Base64.getEncoder().encodeToString(buffer, 0, bytesRead)).getBytes()
-                        : Base64.getDecoder().decode(cipher.decrypt(new String(buffer, 0, bytesRead)));
+                        ? cipher.encrypt(Base64.getEncoder().encodeToString(Arrays.copyOf(buffer, bytesRead))).getBytes()
+                        : Base64.getDecoder().decode(cipher.decrypt(new String(Arrays.copyOf(buffer, bytesRead), StandardCharsets.UTF_8)));
 
                 outputStream.write(processedBytes);
             }
