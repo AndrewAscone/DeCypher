@@ -4,6 +4,7 @@ import com.scone.DeCypher.service.FileEncryptionService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +23,14 @@ public class FileEncryptionController {
         this.fileEncryptionService = fileEncryptionService;
     }
 
+    @PostMapping("/encrypt")
     public ResponseEntity<byte[]> encryptFile(@RequestParam("file") MultipartFile file,
                                               @RequestParam("cipher") String cipherName,
                                               @RequestParam("key") String key){
         return processFile(file, cipherName, key, true);
     }
 
+    @PostMapping("/decrypt")
     public ResponseEntity<byte[]> decryptFile(@RequestParam("file") MultipartFile file,
                                               @RequestParam("cipher") String cipherName,
                                               @RequestParam("key") String key){
