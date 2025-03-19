@@ -28,7 +28,7 @@ public class FileEncryptionService {
         return processFile(file, cipherName, key, false);
     }
 
-    private File processFile(MultipartFile file, String cipherName, String key, boolean encrypt) throws IOException{
+    public File processFile(MultipartFile file, String cipherName, String key, boolean encrypt) throws IOException{
         EncryptionCipher cipher = cipherFactory.getCipher(cipherName, key);
 
         //Create a temp file for output
