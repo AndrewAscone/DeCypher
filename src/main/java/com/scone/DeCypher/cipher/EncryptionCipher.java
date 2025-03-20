@@ -4,6 +4,7 @@ public interface EncryptionCipher {
     String encrypt(String text);
     String decrypt(String text);
     boolean isValidKey();
+
     default byte[] encryptBytes(byte[] data){
         throw new UnsupportedOperationException("Byte encryption not supported for this cipher.");
     }

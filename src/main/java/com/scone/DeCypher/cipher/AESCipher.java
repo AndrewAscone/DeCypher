@@ -53,6 +53,16 @@ public class AESCipher implements EncryptionCipher {
         return iv;
     }
 
+    @Override
+    public byte[] encryptBytes(byte[] data){
+        return null;
+    }
+
+    @Override
+    public byte[] decryptBytes(byte[] data) {
+        return null;
+    }
+
     private byte[] validateAndFormatKey(String keyString){
         byte[] keyBytes = keyString.getBytes(StandardCharsets.UTF_8);
         if(keyBytes.length == 16){
