@@ -55,12 +55,31 @@ public class AESCipher implements EncryptionCipher {
 
     @Override
     public byte[] encryptBytes(byte[] data){
-        return null;
+        byte[] iv = generateIV();
+        byte[] encryptedData = processCipher(data, Cipher.ENCRYPT_MODE, iv);
+
+        // Prepend IV to the encrypted data
+        byte[] combined = new byte[iv.length + encryptedData.length];
+        System.arraycopy(iv, 0, combined, 0, iv.length);
+        System.arraycopy(encryptedData, 0, combined, iv.length, encryptedData.length);
+
+        return combined;
     }
 
     @Override
     public byte[] decryptBytes(byte[] data) {
-        return null;
+        if(data.length < 16) {
+            throw new IllegalArgumentException("Invalid AES encrypted data: missing IV");
+        }
+
+        // Extract IV (first 16 bytes) and encrypted content
+        byte[] iv = new byte[16];
+        byte[] encryptedData = new byte[data.length - 16];
+
+        System.arraycopy(data, 0, iv, 0, 16);
+        System.arraycopy(data, 16, encryptedData, 0, encryptedData.length);
+
+        return processCipher(encryptedData, Cipher.DECRYPT_MODE, iv);
     }
 
     private byte[] validateAndFormatKey(String keyString){
