@@ -10,7 +10,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Base64;
 
 @Service
 public class FileEncryptionService {
@@ -42,9 +41,11 @@ public class FileEncryptionService {
             int bytesRead;
 
             while((bytesRead = inputStream.read(buffer)) != -1){
+                byte[] chunk = Arrays.copyOf(buffer, bytesRead);
+
                 byte[] processedBytes = encrypt
-                        ? cipher.encrypt(Base64.getEncoder().encodeToString(Arrays.copyOf(buffer, bytesRead))).getBytes()
-                        : Base64.getDecoder().decode(cipher.decrypt(new String(Arrays.copyOf(buffer, bytesRead), StandardCharsets.UTF_8)));
+                        ? cipher.encryptBytes(chunk) // Encrypt raw bytes
+                        : cipher.decryptBytes(chunk); // Decrypt raw bytes
 
                 outputStream.write(processedBytes);
             }
