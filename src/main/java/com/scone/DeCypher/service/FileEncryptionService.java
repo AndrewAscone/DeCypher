@@ -37,7 +37,7 @@ public class FileEncryptionService {
         try(InputStream inputStream = file.getInputStream();
             OutputStream outputStream = new FileOutputStream(tempFile.toFile())){
 
-            byte[] buffer = new byte[4096];
+            byte[] buffer = new byte[4096]; //TODO: Adjust how data is being taken in to avoid 'pad block corrupted' errors
             int bytesRead;
 
             while((bytesRead = inputStream.read(buffer)) != -1){
