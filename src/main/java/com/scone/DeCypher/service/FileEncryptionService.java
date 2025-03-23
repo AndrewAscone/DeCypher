@@ -30,26 +30,17 @@ public class FileEncryptionService {
     public File processFile(MultipartFile file, String cipherName, String key, boolean encrypt) throws IOException{
         EncryptionCipher cipher = cipherFactory.getCipher(cipherName, key);
 
+        // Read the entire file into a byte array
+        byte[] fileBytes = file.getBytes();
+
+        // Process the entire file at once
+        byte[] processedBytes = encrypt ? cipher.encryptBytes(fileBytes) : cipher.decryptBytes(fileBytes);
+
         //Create a temp file for output
         String suffix = encrypt ? ".enc" : ".dec";
         Path tempFile = Files.createTempFile("encrypted_", suffix);
 
-        try(InputStream inputStream = file.getInputStream();
-            OutputStream outputStream = new FileOutputStream(tempFile.toFile())){
-
-            byte[] buffer = new byte[4096]; //TODO: Adjust how data is being taken in to avoid 'pad block corrupted' errors
-            int bytesRead;
-
-            while((bytesRead = inputStream.read(buffer)) != -1){
-                byte[] chunk = Arrays.copyOf(buffer, bytesRead);
-
-                byte[] processedBytes = encrypt
-                        ? cipher.encryptBytes(chunk) // Encrypt raw bytes
-                        : cipher.decryptBytes(chunk); // Decrypt raw bytes
-
-                outputStream.write(processedBytes);
-            }
-        }
+        Files.write(tempFile, processedBytes); // Write processed data to the file
 
         return tempFile.toFile();
     }
