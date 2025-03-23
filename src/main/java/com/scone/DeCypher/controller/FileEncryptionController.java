@@ -40,7 +40,15 @@ public class FileEncryptionController {
     private ResponseEntity<Resource> processAndRespond(MultipartFile file, String cipherName, String key, boolean encrypt) throws IOException {
         File processedFile = fileEncryptionService.processFile(file, cipherName, key, encrypt);
         String prefix = encrypt ? "encrypted_" : "decrypted_";
-        return buildFileResponse(processedFile, prefix + file.getOriginalFilename());
+
+        ResponseEntity<Resource> response = buildFileResponse(processedFile, prefix + file.getOriginalFilename());
+
+        // Delete file after response
+        if(!processedFile.delete()){
+            System.err.println("Warning: Temporary file " + processedFile.getAbsolutePath() + " could not be deleted.");
+        }
+
+        return response;
     }
 
     private ResponseEntity<Resource> buildFileResponse(File file, String outputFileName) {
@@ -48,6 +56,7 @@ public class FileEncryptionController {
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + outputFileName + "\"")
+                .header(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
                 .body(resource);
     }
 }
