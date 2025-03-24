@@ -54,6 +54,9 @@ public class FileEncryptionController {
     private ResponseEntity<Resource> buildFileResponse(File file, String outputFileName) throws IOException {
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
+        // Log file creation
+        System.out.println("Temp file created: " + file.getAbsolutePath());
+
         ResponseEntity<Resource> response = ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + outputFileName + "\"")
                 .header(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
@@ -63,7 +66,9 @@ public class FileEncryptionController {
         new Thread(() -> {
             try{
                 Thread.sleep(5000); // Small delay to ensure response is sent
-                if(!file.delete()){
+                if(file.delete()){
+                    System.out.println("Temp file deleted: " + file.getAbsolutePath());
+                } else {
                     System.err.println("Warning: Temporary file " + file.getAbsolutePath() + " could not be deleted.");
                 }
             } catch (InterruptedException e){
