@@ -2,6 +2,7 @@ package com.scone.DeCypher.controller;
 
 import com.scone.DeCypher.service.FileEncryptionService;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 @RestController
 @RequestMapping("/file")
@@ -44,17 +44,15 @@ public class FileEncryptionController {
         ResponseEntity<Resource> response = buildFileResponse(processedFile, prefix + file.getOriginalFilename());
 
         // Delete file after response
-        if(!processedFile.delete()){
+        if(!processedFile.delete()) {
             System.err.println("Warning: Temporary file " + processedFile.getAbsolutePath() + " could not be deleted.");
         }
-
-        // TODO: Ensure this deletion is actually taking place
 
         return response;
     }
 
-    private ResponseEntity<Resource> buildFileResponse(File file, String outputFileName) {
-        Resource resource = new FileSystemResource(file);
+    private ResponseEntity<Resource> buildFileResponse(File file, String outputFileName) throws IOException {
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + outputFileName + "\"")
