@@ -48,6 +48,8 @@ public class FileEncryptionController {
             System.err.println("Warning: Temporary file " + processedFile.getAbsolutePath() + " could not be deleted.");
         }
 
+        // TODO: Ensure this deletion is actually taking place
+
         return response;
     }
 
