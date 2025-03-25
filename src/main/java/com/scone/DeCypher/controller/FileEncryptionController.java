@@ -69,6 +69,7 @@ public class FileEncryptionController {
                 if(file.delete()){
                     System.out.println("Temp file deleted: " + file.getAbsolutePath());
                 } else {
+                    // This message is getting sent every time, maybe change sleep time to fix?
                     System.err.println("Warning: Temporary file " + file.getAbsolutePath() + " could not be deleted.");
                 }
             } catch (InterruptedException e){
