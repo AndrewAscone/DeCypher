@@ -1,6 +1,6 @@
-package com.scone.DeCypher.model;
+package com.scone.DeCypher.backend.model;
 
-import com.scone.DeCypher.cipher.*;
+import com.scone.DeCypher.backend.cipher.*;
 
 public enum CipherType {
     CAESAR("caesar", CaesarCipher.class),

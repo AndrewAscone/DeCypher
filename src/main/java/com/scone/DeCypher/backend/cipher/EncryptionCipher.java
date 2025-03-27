@@ -1,4 +1,4 @@
-package com.scone.DeCypher.cipher;
+package com.scone.DeCypher.backend.cipher;
 
 public interface EncryptionCipher {
     String encrypt(String text);

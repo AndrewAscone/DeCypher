@@ -1,4 +1,4 @@
-package com.scone.DeCypher;
+package com.scone.DeCypher.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

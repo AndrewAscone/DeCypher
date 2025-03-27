@@ -1,4 +1,4 @@
-package com.scone.DeCypher.cipher;
+package com.scone.DeCypher.backend.cipher;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;

@@ -1,15 +1,13 @@
-package com.scone.DeCypher.service;
+package com.scone.DeCypher.backend.service;
 
-import com.scone.DeCypher.cipher.CipherFactory;
-import com.scone.DeCypher.cipher.EncryptionCipher;
+import com.scone.DeCypher.backend.cipher.CipherFactory;
+import com.scone.DeCypher.backend.cipher.EncryptionCipher;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 
 @Service
 public class FileEncryptionService {

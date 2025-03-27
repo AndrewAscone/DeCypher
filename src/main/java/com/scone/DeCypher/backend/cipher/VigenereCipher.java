@@ -1,4 +1,4 @@
-package com.scone.DeCypher.cipher;
+package com.scone.DeCypher.backend.cipher;
 
 public class VigenereCipher implements EncryptionCipher {
     private String key;

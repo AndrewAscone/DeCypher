@@ -1,7 +1,6 @@
-package com.scone.DeCypher.controller;
+package com.scone.DeCypher.backend.controller;
 
-import com.scone.DeCypher.service.FileEncryptionService;
-import org.springframework.core.io.FileSystemResource;
+import com.scone.DeCypher.backend.service.FileEncryptionService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

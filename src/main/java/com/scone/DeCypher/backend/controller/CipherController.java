@@ -1,8 +1,8 @@
-package com.scone.DeCypher.controller;
+package com.scone.DeCypher.backend.controller;
 
-import com.scone.DeCypher.model.EncryptionRequest;
-import com.scone.DeCypher.model.EncryptionResponse;
-import com.scone.DeCypher.service.CipherService;
+import com.scone.DeCypher.backend.model.EncryptionRequest;
+import com.scone.DeCypher.backend.model.EncryptionResponse;
+import com.scone.DeCypher.backend.service.CipherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

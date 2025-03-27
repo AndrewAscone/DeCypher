@@ -1,6 +1,6 @@
-package com.scone.DeCypher.cipher;
+package com.scone.DeCypher.backend.cipher;
 
-import com.scone.DeCypher.model.CipherType;
+import com.scone.DeCypher.backend.model.CipherType;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

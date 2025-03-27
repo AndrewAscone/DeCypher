@@ -1,4 +1,4 @@
-package com.scone.DeCypher.model;
+package com.scone.DeCypher.backend.model;
 
 public class EncryptionRequest {
     private String text;

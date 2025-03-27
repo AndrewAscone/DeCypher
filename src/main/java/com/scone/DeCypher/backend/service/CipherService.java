@@ -1,6 +1,6 @@
-package com.scone.DeCypher.service;
+package com.scone.DeCypher.backend.service;
 
-import com.scone.DeCypher.cipher.CipherFactory;
+import com.scone.DeCypher.backend.cipher.CipherFactory;
 import org.springframework.stereotype.Service;
 
 @Service

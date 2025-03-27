@@ -1,4 +1,4 @@
-package com.scone.DeCypher.model;
+package com.scone.DeCypher.backend.model;
 
 public class EncryptionResponse {
     private String result;
