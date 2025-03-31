@@ -37,3 +37,19 @@ h2 {
     border-radius: 4px;
     font-size: 1rem;
 }
+
+.encrypt-btn {
+    background-color: #007bff;
+}
+
+.decrypt-btn {
+    background-color: #28a745;
+}
+
+.result-box {
+    margin-top: 12px;
+    padding: 10px;
+    background: #f1f1f1;
+    border-radius: 4px;
+    text-align: left;
+}
