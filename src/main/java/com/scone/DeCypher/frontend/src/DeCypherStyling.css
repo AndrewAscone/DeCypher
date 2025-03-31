@@ -22,3 +22,18 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.encrypt-btn,
+.decrypt-btn {
+    padding: 10px 60px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+}
