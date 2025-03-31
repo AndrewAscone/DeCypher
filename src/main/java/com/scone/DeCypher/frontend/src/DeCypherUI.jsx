@@ -40,6 +40,7 @@ export default function DeCypherUI() {
             >
                 <option value="caesar">Caesar Cipher</option>
                 <option value="vigenere">Vigenere Cipher</option>
+                <option value="atbash">Atbash Cipher</option>
                 <option value="aes">AES</option>
             </select>
             <div className="button-container">
