@@ -8,8 +8,21 @@ export default function DeCypherUI() {
     const [result, setResult] = useState("");
 
     const handleEncrypt = () => {
-        // Encryption logic will go here
-        setResult(`Encrypted(${cipher}): ${message}`);
+        try {
+            const response = await fetch("http://localhost:8080/api/encrypt", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ text: message, key: key, cipher: cipher})
+            });
+
+            const data = await response.json();
+            setResult(data.result);
+        } catch (error) {
+            console.error("Encryption failed:", error);
+            setResult("Error: Encryption failed.");
+        }
     };
 
     const handleDecrypt = () => {
