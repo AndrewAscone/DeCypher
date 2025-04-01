@@ -7,7 +7,7 @@ export default function DeCypherUI() {
     const [cipher, setCipher] = useState("caesar");
     const [result, setResult] = useState("");
 
-    const handleEncrypt = () => {
+    const handleEncrypt = async () => {
         try {
             const response = await fetch("http://localhost:8080/api/encrypt", {
                 method: "POST",
