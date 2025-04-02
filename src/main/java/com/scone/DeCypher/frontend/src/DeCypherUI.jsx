@@ -27,7 +27,16 @@ export default function DeCypherUI() {
 
     const handleDecrypt = async () => {
         try {
-            
+            const response = await fetch("http://localhost:8080/api/decrypt", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ text: message, key: key, cipher: cipher}),
+            });
+
+            const data = await response.json();
+            setResult(data.result);
         } catch (error) {
             console.error("Decryption failed:", error);
             setResult("Error: Decryption failed.");
