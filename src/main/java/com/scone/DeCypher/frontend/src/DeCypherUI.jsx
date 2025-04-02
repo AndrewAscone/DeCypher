@@ -25,9 +25,13 @@ export default function DeCypherUI() {
         }
     };
 
-    const handleDecrypt = () => {
-        // Decryption logic will go here
-        setResult(`Decrypted(${cipher}): ${message}`);
+    const handleDecrypt = async () => {
+        try {
+            
+        } catch (error) {
+            console.error("Decryption failed:", error);
+            setResult("Error: Decryption failed.");
+        }
     };
 
     return (
