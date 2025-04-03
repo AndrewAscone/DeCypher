@@ -24,7 +24,7 @@ export default function DeCypherUI() {
             setResult("Error: Encryption failed.");
         }
     };
-
+    // If something goes wrong in testing, check these handle functions
     const handleDecrypt = async () => {
         try {
             const response = await fetch("http://localhost:8080/api/decrypt", {
