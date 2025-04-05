@@ -25,6 +25,8 @@ export default function DeCypherUI() {
         }
     };
     // If something goes wrong in testing, check these handle functions
+    // Double check URLs being used
+    // These are only for text encryptions, need to differentiate for files
     const handleDecrypt = async () => {
         try {
             const response = await fetch("http://localhost:8080/api/decrypt", {
