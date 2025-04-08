@@ -25,7 +25,7 @@ export default function DeCypherUI() {
         }
     };
     // If something goes wrong in testing, check these handle functions
-    // Double check URLs being used
+    // Double check URLs being used (need to manage CORS stuff in back end)
     // These are only for text encryptions, need to differentiate for files
     const handleDecrypt = async () => {
         try {
