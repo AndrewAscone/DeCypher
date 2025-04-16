@@ -7,6 +7,19 @@ export default function DeCypherUI() {
     const [cipher, setCipher] = useState("caesar");
     const [result, setResult] = useState("");
 
+    const getCipherInfo = (cipher) => {
+        switch (cipher) {
+            case "caesar":
+                return "Caesar Cipher";
+            case "vigenere":
+                return "Vigenere Cipher";
+            case "atbash":
+                return "Atbash Cipher";
+            case "aes":
+                return "AES Cipher";
+        }
+    };
+
     const handleEncrypt = async () => {
         try {
             const response = await fetch("http://localhost:8080/api/encrypt", {
@@ -24,8 +37,7 @@ export default function DeCypherUI() {
             setResult("Error: Encryption failed.");
         }
     };
-    // If something goes wrong in testing, check these handle functions
-    // Double check URLs being used (need to manage CORS stuff in back end)
+   
     // These are only for text encryptions, need to differentiate for files
     const handleDecrypt = async () => {
         try {
@@ -71,6 +83,9 @@ export default function DeCypherUI() {
                 <option value="atbash">Atbash Cipher</option>
                 <option value="aes">AES</option>
             </select>
+            <div className="cipher-info">
+                <pre>{getCipherInfo(cipher)}</pre>
+            </div>
             <div className="button-container">
                 <button className="encrypt-btn" onClick={handleEncrypt}>
                     Encrypt
