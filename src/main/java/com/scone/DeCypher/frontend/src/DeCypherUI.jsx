@@ -10,9 +10,9 @@ export default function DeCypherUI() {
     const getCipherInfo = (cipher) => {
         switch (cipher) {
             case "caesar":
-                return "Caesar Cipher";
+                return "Caesar Cipher: This cipher uses a numeric key to shift the letters in the message.\nKey: A whole number greater than zero.";
             case "vigenere":
-                return "Vigenere Cipher";
+                return "Vigenere Cipher: This cipher uses a word or phrase to shift letters based on each character.\nKey: A string of alphabetic characters.";
             case "atbash":
                 return "Atbash Cipher";
             case "aes":
