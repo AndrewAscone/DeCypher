@@ -14,7 +14,7 @@ export default function DeCypherUI() {
             case "vigenere":
                 return "Vigenere Cipher: This cipher uses a word or phrase to shift letters based on each character.\nKey: A string of alphabetic characters.";
             case "atbash":
-                return "Atbash Cipher";
+                return "Atbash Cipher: This cipher uses a fixed substitution, so it does not need a key.\nKey: Leave this field empty";
             case "aes":
                 return "AES Cipher";
         }
