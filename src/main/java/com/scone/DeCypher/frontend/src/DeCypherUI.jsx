@@ -16,7 +16,7 @@ export default function DeCypherUI() {
             case "atbash":
                 return "Atbash Cipher: This cipher uses a fixed substitution, so it does not need a key.\nKey: Leave this field empty";
             case "aes":
-                return "AES Cipher";
+                return "AES Cipher: This cipher uses a secret key for secure encryption.\nKey: Must be exactly 16 characters";
         }
     };
 
