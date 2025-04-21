@@ -1,3 +1,4 @@
+/* Layout Container */
 .container {
     padding: 16px;
     max-width: 400px;
@@ -8,11 +9,24 @@
     text-align: center;
 }
 
+/* Headings */
 h2 {
     font-size: 1.5rem;
     margin-bottom: 12px;
 }
 
+/* Cipher Box Info */
+.cipher-info {
+    background-color: #f1f1f1;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #007acc;
+    white-space: pre-wrap;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* Inputs and Dropdowns */
 .input-area,
 .input-field,
 .dropdown {
@@ -23,11 +37,17 @@ h2 {
     border-radius: 4px;
 }
 
+/* Focus Styles */
+
+/* Dropdown Cursor */
+
+/* Button Container */
 .button-container {
     display: flex;
     justify-content: space-between;
 }
 
+/* Buttons */
 .encrypt-btn,
 .decrypt-btn {
     padding: 10px 60px;
@@ -38,14 +58,17 @@ h2 {
     font-size: 1rem;
 }
 
+/* Encrypt Button Styling */
 .encrypt-btn {
     background-color: #007bff;
 }
 
+/* Decrypt Button Styling */
 .decrypt-btn {
     background-color: #28a745;
 }
 
+/* Result Box */
 .result-box {
     margin-top: 12px;
     padding: 10px;
@@ -54,12 +77,4 @@ h2 {
     text-align: left;
 }
 
-.cipher-info {
-    background-color: #f1f1f1;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border-left: 4px solid #007acc;
-    white-space: pre-wrap;
-    font-size: 0.9rem;
-    color: #333;
-}
+/* Responsive Layout */
