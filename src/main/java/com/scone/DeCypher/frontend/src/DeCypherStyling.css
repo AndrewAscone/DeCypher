@@ -38,8 +38,17 @@ h2 {
 }
 
 /* Focus Styles */
+.input-field:focus,
+.input-area:focus,
+.dropdown:focus {
+    outline: 2px solid #007acc;
+    outline-offset: 2px;
+}
 
 /* Dropdown Cursor */
+.dropdown {
+    cursor: pointer;
+}
 
 /* Button Container */
 .button-container {
@@ -63,9 +72,17 @@ h2 {
     background-color: #007bff;
 }
 
+.encrypt-btn:hover {
+    background-color: #0056b3;
+}
+
 /* Decrypt Button Styling */
 .decrypt-btn {
     background-color: #28a745;
+}
+
+.decrypt-btn:hover {
+    background-color: #1e7e34;
 }
 
 /* Result Box */
@@ -78,3 +95,10 @@ h2 {
 }
 
 /* Responsive Layout */
+@media (max-width: 480px) {
+    .encrypt-btn,
+    .decrypt-btn {
+        padding: 10px 30px;
+        font-size: 0.9rem;
+    }
+}
