@@ -84,7 +84,9 @@ export default function DeCypherUI() {
                 <option value="aes">AES</option>
             </select>
             <div className="cipher-info">
-                <pre>{getCipherInfo(cipher)}</pre>
+                {getCipherInfo(cipher).split("\n").map((line, index) => (
+                    <p key={index}>{line}</p>
+                ))}
             </div>
             <div className="button-container">
                 <button className="encrypt-btn" onClick={handleEncrypt}>
