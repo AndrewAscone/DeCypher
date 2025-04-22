@@ -23,9 +23,12 @@ h2 {
     border-left: 4px solid #007acc;
     font-size: 0.9rem;
     color: #333;
-    word-wrap: break-word; /* Ensures long words break to next line */
-    overflow-wrap: break-word; /* Modern alternative for breaking */
-    white-space: normal; /* Allows wrapping instead of pre-wrap */
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Inputs and Dropdowns */
