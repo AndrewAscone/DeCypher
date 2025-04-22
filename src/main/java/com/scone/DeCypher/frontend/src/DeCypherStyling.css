@@ -93,6 +93,9 @@ h2 {
     background: #f1f1f1;
     border-radius: 4px;
     text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 /* Responsive Layout */
