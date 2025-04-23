@@ -61,7 +61,21 @@ export default function DeCypherUI() {
 
     return (
         <div className="container">
-            <h2>Text Encryption</h2>
+            <div className="mode-toggle">
+                <button
+                    className={mode === "text" ? "active" : ""}
+                    onClick={() => setMode("text")}
+                >
+                    Text Mode
+                </button>
+                <button
+                    className={mode === "file" ? "active" : ""}
+                    onClick={() => setMode("file")}
+                >
+                    File Mode
+                </button>
+            </div>
+            <h2>{mode === "text" ? "Text Encryption" : "File Encryption"}</h2>
             <textarea
                 className="input-area"
                 placeholder="Enter your message..."
