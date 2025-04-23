@@ -6,6 +6,8 @@ export default function DeCypherUI() {
     const [key, setKey] = useState("");
     const [cipher, setCipher] = useState("caesar");
     const [result, setResult] = useState("");
+    const [mode, setMode] = useState("text"); // "text" or "file"
+    const [file, setFile] = useState(null);
 
     const getCipherInfo = (cipher) => {
         switch (cipher) {
