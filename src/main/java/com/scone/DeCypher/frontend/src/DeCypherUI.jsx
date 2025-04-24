@@ -76,19 +76,47 @@ export default function DeCypherUI() {
                 </button>
             </div>
             <h2>{mode === "text" ? "Text Encryption" : "File Encryption"}</h2>
-            <textarea
-                className="input-area"
-                placeholder="Enter your message..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-            />
-            <input
-                className="input-field"
-                type="text"
-                placeholder="Enter key"
-                value={key}
-                onChange={(e) => setKey(e.target.value)}
-            />
+            {mode === "text" ? (
+                <>
+                    <textarea
+                        className="input-area"
+                        placeholder="Enter your message..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                    />
+                    <input
+                        className="input-field"
+                        type="text"
+                        placeholder="Enter key"
+                        value={key}
+                        onChange={(e) => setKey(e.target.value)}
+                    />
+                </>
+            ) : (
+                <>
+                    <input
+                        className="input-field"
+                        type="file"
+                        onChange={(e) => {
+                            const selectedFile = e.target.files[0];
+                            if (selectedFile && selectedFile.size > 100 * 1024 * 1024) {
+                                alert("file size exceeds 100MB limit.")
+                                e.target.value = null;
+                            } else {
+                                setFile(selectedFile);
+                            }
+                        }}
+                    />
+                    <input
+                        className="input-field"
+                        type="text"
+                        placeholder="Enter key"
+                        value={key}
+                        onChange={(e) => setKey(e.target.value)}
+                    />
+                </>
+            )}
+            
             <select
                 className="dropdown"
                 value={cipher}
