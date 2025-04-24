@@ -15,6 +15,14 @@ h2 {
     margin-bottom: 12px;
 }
 
+/* Mode Toggle */
+.mode-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+    gap: 8px;
+}
+
 /* Cipher Box Info */
 .cipher-info {
     background-color: #f1f1f1;
