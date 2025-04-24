@@ -23,6 +23,17 @@ h2 {
     gap: 8px;
 }
 
+.mode-toggle button {
+    padding: 8px 20px;
+    border: 1px solid #007acc;
+    border-radius: 4px;
+    background-color: white;
+    color: #007acc;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2 ease;
+}
+
 /* Cipher Box Info */
 .cipher-info {
     background-color: #f1f1f1;
