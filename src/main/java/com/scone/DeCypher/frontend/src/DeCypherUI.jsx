@@ -22,7 +22,7 @@ export default function DeCypherUI() {
         }
     };
 
-    const handleEncrypt = async () => {
+    const handleTextEncrypt = async () => {
         try {
             const response = await fetch("http://localhost:8080/api/encrypt", {
                 method: "POST",
@@ -41,7 +41,7 @@ export default function DeCypherUI() {
     };
    
     // These are only for text encryptions, need to differentiate for files
-    const handleDecrypt = async () => {
+    const handleTextDecrypt = async () => {
         try {
             const response = await fetch("http://localhost:8080/api/decrypt", {
                 method: "POST",
@@ -58,6 +58,14 @@ export default function DeCypherUI() {
             setResult("Error: Decryption failed.");
         }
     };
+
+    const handleFileEncrypt = async () => {
+
+    }
+
+    const handleFileDecrypt = async () => {
+        
+    }
 
     return (
         <div className="container">
@@ -133,10 +141,10 @@ export default function DeCypherUI() {
                 ))}
             </div>
             <div className="button-container">
-                <button className="encrypt-btn" onClick={handleEncrypt}>
+                <button className="encrypt-btn" onClick={handleTextEncrypt}>
                     Encrypt
                 </button>
-                <button className="decrypt-btn" onClick={handleDecrypt}>
+                <button className="decrypt-btn" onClick={handleTextDecrypt}>
                     Decrypt
                 </button>
             </div>
