@@ -2,12 +2,16 @@ import { useState } from "react";
 import "./DeCypherStyling.css";
 
 export default function DeCypherUI() {
+    // === State Variables ===
     const [message, setMessage] = useState("");
     const [key, setKey] = useState("");
     const [cipher, setCipher] = useState("caesar");
     const [result, setResult] = useState("");
     const [mode, setMode] = useState("text"); // "text" or "file"
     const [file, setFile] = useState(null);
+
+    // === Configuration ===
+    const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
     const getCipherInfo = (cipher) => {
         switch (cipher) {
