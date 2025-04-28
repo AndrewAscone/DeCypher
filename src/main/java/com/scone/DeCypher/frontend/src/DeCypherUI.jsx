@@ -200,10 +200,16 @@ export default function DeCypherUI() {
                 ))}
             </div>
             <div className="button-container">
-                <button className="encrypt-btn" onClick={handleTextEncrypt}>
+                <button 
+                    className="encrypt-btn" 
+                    onClick={mode === "file" ? handleFileEncrypt : handleTextEncrypt}
+                >
                     Encrypt
                 </button>
-                <button className="decrypt-btn" onClick={handleTextDecrypt}>
+                <button 
+                    className="decrypt-btn" 
+                    onClick={mode === "file" ? handleFileDecrypt : handleTextDecrypt}
+                >
                     Decrypt
                 </button>
             </div>
