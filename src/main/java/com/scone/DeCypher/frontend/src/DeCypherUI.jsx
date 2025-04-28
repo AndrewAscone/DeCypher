@@ -95,7 +95,15 @@ export default function DeCypherUI() {
     };
 
     const handleFileDecrypt = async () => {
-        
+        if(!file) {
+            setResult("Please select a file first.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("key", key);
+        formData.append("cipher", cipher);
     }
 
     return (
