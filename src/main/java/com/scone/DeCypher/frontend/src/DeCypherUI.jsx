@@ -68,18 +68,26 @@ export default function DeCypherUI() {
             return;
         }
 
-        if(file.size > 100 * 1024 * 1024) {
-            setResult("File size exceeds the 100MB limit");
-            return;
-        }
-
         const formData = new FormData();
         formData.append("file", file);
         formData.append("key", key);
         formData.append("cipher", cipher);
 
         try {
-            
+            const response = await fetch(`${apiUrl}/file/encrypt`, {
+                method: "POST",
+                body: formData,
+            });
+
+            const blob = await response.blob();
+            const downloadUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = `encrypted_${file.name}`;
+            link.click();
+            window.URL.revokeObjectURL(downloadUrl);
+
+            setResult("File encrypted and download started.");
         } catch (error) {
             console.error("File encryption failed:", error);
             setResult("Error: File encryption failed.");
