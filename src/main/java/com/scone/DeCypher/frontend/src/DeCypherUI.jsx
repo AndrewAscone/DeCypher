@@ -106,7 +106,20 @@ export default function DeCypherUI() {
         formData.append("cipher", cipher);
 
         try {
+            const response = await fetch(`${apiUrl}/file/decrypt`, {
+                method: "POST",
+                body: formData,
+            });
 
+            const blob = await response.blob();
+            const downloadUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = `decrypted_${file.name}`;
+            link.click();
+            window.URL.revokeObjectURL(downloadUrl);
+
+            setResult("File decrypted and download started.");
         } catch (error) {
             console.error("File decryption failed:", error);
             setResult("Error: File decryption failed.");
