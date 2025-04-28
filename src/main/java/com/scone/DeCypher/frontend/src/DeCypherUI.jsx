@@ -28,7 +28,7 @@ export default function DeCypherUI() {
 
     const handleTextEncrypt = async () => {
         try {
-            const response = await fetch("http://localhost:8080/api/encrypt", {
+            const response = await fetch(`${apiUrl}/api/encrypt`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -44,10 +44,9 @@ export default function DeCypherUI() {
         }
     };
    
-    // These are only for text encryptions, need to differentiate for files
     const handleTextDecrypt = async () => {
         try {
-            const response = await fetch("http://localhost:8080/api/decrypt", {
+            const response = await fetch(`${apiUrl}/api/decrypt`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
