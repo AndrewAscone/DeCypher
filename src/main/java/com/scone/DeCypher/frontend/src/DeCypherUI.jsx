@@ -104,7 +104,14 @@ export default function DeCypherUI() {
         formData.append("file", file);
         formData.append("key", key);
         formData.append("cipher", cipher);
-    }
+
+        try {
+
+        } catch (error) {
+            console.error("File decryption failed:", error);
+            setResult("Error: File decryption failed.");
+        }
+    };
 
     return (
         <div className="container">
