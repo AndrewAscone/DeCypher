@@ -36,6 +36,10 @@ export default function DeCypherUI() {
                 body: JSON.stringify({ text: message, key: key, cipher: cipher})
             });
 
+            if(!response.ok){
+                throw new Error("Server responded with an error.");
+            }
+
             const data = await response.json();
             setResult(data.result);
         } catch (error) {
@@ -53,6 +57,10 @@ export default function DeCypherUI() {
                 },
                 body: JSON.stringify({ text: message, key: key, cipher: cipher}),
             });
+
+            if(!response.ok) {
+                throw new Error("Server responded with an error.");
+            }
 
             const data = await response.json();
             setResult(data.result);
@@ -78,6 +86,10 @@ export default function DeCypherUI() {
                 method: "POST",
                 body: formData,
             });
+
+            if(!response.ok){
+                throw new Error("Server responded with an error.");
+            }
 
             const blob = await response.blob();
             const downloadUrl = window.URL.createObjectURL(blob);
@@ -110,6 +122,10 @@ export default function DeCypherUI() {
                 method: "POST",
                 body: formData,
             });
+
+            if(!response.ok){
+                throw new Error("Server responded with an error.");
+            }
 
             const blob = await response.blob();
             const downloadUrl = window.URL.createObjectURL(blob);
