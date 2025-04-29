@@ -82,6 +82,7 @@ export default function DeCypherUI() {
         formData.append("cipher", cipher);
 
         try {
+            console.log("Encrypting to:", `${apiUrl}/file/encrypt`);
             const response = await fetch(`${apiUrl}/file/encrypt`, {
                 method: "POST",
                 body: formData,
