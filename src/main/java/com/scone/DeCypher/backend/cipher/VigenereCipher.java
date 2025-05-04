@@ -14,11 +14,11 @@ public class VigenereCipher implements EncryptionCipher {
         }
 
         StringBuilder encryptedText = new StringBuilder();
-        key = formatKey(text);
+        String formattedKey = formatKey(text);
 
         for (int i = 0; i < text.length(); i++) {
             char nextTextChar = text.charAt(i);
-            char nextKeyChar = key.charAt(i);
+            char nextKeyChar = formattedKey.charAt(i);
 
             if(Character.isLetter(nextTextChar)){
                 char base = Character.isUpperCase(nextTextChar) ? 'A' : 'a';
@@ -39,11 +39,11 @@ public class VigenereCipher implements EncryptionCipher {
         }
 
         StringBuilder decryptedText = new StringBuilder();
-        key = formatKey(text);
+        String formattedKey = formatKey(text);
 
         for (int i = 0; i < text.length(); i++) {
             char nextTextChar = text.charAt(i);
-            char nextKeyChar = key.charAt(i);
+            char nextKeyChar = formattedKey.charAt(i);
 
             if(Character.isLetter(nextTextChar)){
                 char base = Character.isUpperCase(nextTextChar) ? 'A' : 'a';
