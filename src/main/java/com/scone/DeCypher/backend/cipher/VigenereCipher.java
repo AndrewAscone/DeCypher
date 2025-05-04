@@ -22,7 +22,10 @@ public class VigenereCipher implements EncryptionCipher {
 
             if(Character.isLetter(nextTextChar)){
                 char base = Character.isUpperCase(nextTextChar) ? 'A' : 'a';
-                int shift = nextKeyChar - base;
+                char adjustedKeyChar = Character.isUpperCase(nextTextChar)
+                        ? Character.toUpperCase(nextKeyChar)
+                        : Character.toLowerCase(nextKeyChar);
+                int shift = adjustedKeyChar - base;
                 encryptedText.append((char) ((nextTextChar - base + shift) % 26 + base));
             } else {
                 encryptedText.append(nextTextChar);
