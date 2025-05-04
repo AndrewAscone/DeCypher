@@ -13,7 +13,7 @@ public class CaesarCipher implements EncryptionCipher {
             throw new IllegalArgumentException("Invalid key for Caesar cipher. Key must be a non-negative integer.");
         }
 
-        int shift = Integer.parseInt(key);
+        int shift = Integer.parseInt(key) % 26;
         return shiftText(text, shift);
     }
 
@@ -23,7 +23,7 @@ public class CaesarCipher implements EncryptionCipher {
             throw new IllegalArgumentException("Invalid key for Caesar cipher. Key must be a non-negative integer.");
         }
 
-        int shift = Integer.parseInt(key);
+        int shift = Integer.parseInt(key) % 26;
         return shiftText(text, -shift);
     }
 
