@@ -69,43 +69,71 @@ public class TestVigenereCipher {
     @Test
     void testKeyLongerThanText() {
         // given
+        cipher = new VigenereCipher("ThisIsAVeryLongKey");
+        String input = "Short";
+
         // when
+        String encrypted = cipher.encrypt(input);
+        String decrypted = cipher.decrypt(encrypted);
+
         // then
+        assertEquals(input, decrypted);
     }
 
     @Test
     void testKeyShorterThanText() {
         // given
+        cipher = new VigenereCipher("abc");
+        String input = "ThisIsALongerText";
+
         // when
+        String encrypted = cipher.encrypt(input);
+        String decrypted = cipher.decrypt(encrypted);
+
         // then
+        assertEquals(input, decrypted);
     }
 
     @Test
     void testAlphabeticKeyIsValid() {
         // given
+        cipher = new VigenereCipher("NewKey");
+
         // when
+        boolean isValid = cipher.isValidKey();
+
         // then
+        assertTrue(isValid);
     }
 
     @Test
     void testKeyWithNumbersIsInvalid() {
         // given
+        cipher = new VigenereCipher("sh1ft");
+
         // when
+        boolean isValid = cipher.isValidKey();
+
         // then
+        assertFalse(isValid);
     }
 
     @Test
     void testEncryptThrowsForInvalidKey() {
         // given
-        // when
-        // then
+        cipher = new VigenereCipher("!@#");
+
+        // when/then
+        assertThrows(IllegalArgumentException.class, () -> cipher.encrypt("Hello"));
     }
 
     @Test
     void testDecryptThrowsForInvalidKey() {
         // given
-        // when
-        // then
+        cipher = new VigenereCipher("123");
+
+        // when/then
+        assertThrows(IllegalArgumentException.class, () -> cipher.decrypt("Hello"));
     }
 
 }
