@@ -51,4 +51,61 @@ public class TestVigenereCipher {
         // then
         assertEquals(input, decrypted);
     }
+
+    @Test
+    void testMixedCaseKey() {
+        // given
+        cipher = new VigenereCipher("MiXeDcAsE");
+        String input = "Testing";
+
+        // when
+        String encrypted = cipher.encrypt(input);
+        String decrypted = cipher.decrypt(encrypted);
+
+        // then
+        assertEquals(input, decrypted);
+    }
+
+    @Test
+    void testKeyLongerThanText() {
+        // given
+        // when
+        // then
+    }
+
+    @Test
+    void testKeyShorterThanText() {
+        // given
+        // when
+        // then
+    }
+
+    @Test
+    void testAlphabeticKeyIsValid() {
+        // given
+        // when
+        // then
+    }
+
+    @Test
+    void testKeyWithNumbersIsInvalid() {
+        // given
+        // when
+        // then
+    }
+
+    @Test
+    void testEncryptThrowsForInvalidKey() {
+        // given
+        // when
+        // then
+    }
+
+    @Test
+    void testDecryptThrowsForInvalidKey() {
+        // given
+        // when
+        // then
+    }
+
 }
