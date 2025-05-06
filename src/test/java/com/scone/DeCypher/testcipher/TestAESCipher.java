@@ -39,17 +39,15 @@ public class TestAESCipher {
     }
 
     @Test
-    void testWrongKeyReturnsIncorrectData() {
+    void testWrongKeyThrowsException() {
         // given
         String original = "SensitiveInfo";
         String encrypted = cipher.encrypt(original);
         AESCipher wrongCipher = new AESCipher("wrongsecretkey01");
 
-        // when
-        String decrypted = wrongCipher.decrypt(encrypted);
-
         // then
-        assertNotEquals(original, decrypted, "Decryption with wrong key should fail or return incorrect data");
+        assertThrows(RuntimeException.class, () -> wrongCipher.decrypt(encrypted),
+                "Decrypting with the wrong key should throw a runtime exception");
     }
 
     @Test
