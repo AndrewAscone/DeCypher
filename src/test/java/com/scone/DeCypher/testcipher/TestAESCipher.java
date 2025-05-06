@@ -1,14 +1,24 @@
 package com.scone.DeCypher.testcipher;
 
 import com.scone.DeCypher.backend.cipher.AESCipher;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.security.Security;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestAESCipher {
 
     private AESCipher cipher;
     private final String key = "thisisasecretkey"; // 16 bytes for AES-128
+
+    @BeforeAll
+    static void registerBouncyCastle() {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     @BeforeEach
     void setUp() {
