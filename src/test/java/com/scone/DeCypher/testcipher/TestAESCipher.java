@@ -54,4 +54,25 @@ public class TestAESCipher {
         // then
         assertArrayEquals(original, decrypted, "Decrypted bytes should match original bytes");
     }
+
+    @Test
+    void testProperLengthKeyIsValid() {
+        assertTrue(cipher.isValidKey());
+    }
+
+    @Test
+    void testShortKeyIsNotValid() {
+        AESCipher shortKeyCipher = new AESCipher("shortkey1234567");
+        assertFalse(shortKeyCipher.isValidKey());
+    }
+
+    @Test
+    void testShortByteInputThrowsException() {
+        // given
+        byte[] invalidInput = new byte[10]; // less than 16 bytes (missing IV)
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> cipher.decryptBytes(invalidInput),
+                "Should throw when IV is missing from encrypted data");
+    }
 }
