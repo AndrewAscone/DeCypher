@@ -62,8 +62,9 @@ public class TestAESCipher {
 
     @Test
     void testShortKeyIsNotValid() {
-        AESCipher shortKeyCipher = new AESCipher("shortkey1234567");
-        assertFalse(shortKeyCipher.isValidKey());
+        assertThrows(IllegalArgumentException.class,
+                () -> new AESCipher("shortkey1234567"),
+                "Expected constructor to throw when key is too short");
     }
 
     @Test
