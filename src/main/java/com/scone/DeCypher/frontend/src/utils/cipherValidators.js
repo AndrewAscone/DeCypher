@@ -13,3 +13,8 @@ export function isValidVigenereKey(key) {
 export function isValidAtbashKey() {
     return true;
 }
+
+// AES: key must be exactly 16 bytes
+export function isValidAESKey(key) {
+    return typeof key === 'string' && new TextEncoder().encode(key).length === 16;
+}
