@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./DeCypherStyling.css";
+import * as cipherValidators from './utils/cipherValidators';
 
 export default function DeCypherUI() {
     // === State Variables ===
@@ -12,6 +13,10 @@ export default function DeCypherUI() {
 
     // === Configuration ===
     const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+    const isKeyValid = () => {
+        return cipherValidators.validateKeyForCipher(cipher, key);
+    };
 
     const getCipherInfo = (cipher) => {
         switch (cipher) {
