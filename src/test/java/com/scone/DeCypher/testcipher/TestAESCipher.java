@@ -76,6 +76,12 @@ public class TestAESCipher {
     }
 
     @Test
+    void testMultiByteCharacterKeyIsInvalid() {
+        String multiByteKey = "áááááááááááááááá"; // 16 characters, but >16 bytes
+        assertThrows(IllegalArgumentException.class, () -> new AESCipher(multiByteKey));
+    }
+
+    @Test
     void testShortByteInputThrowsException() {
         // given
         byte[] invalidInput = new byte[10]; // less than 16 bytes (missing IV)
