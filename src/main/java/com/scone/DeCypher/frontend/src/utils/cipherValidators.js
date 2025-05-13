@@ -18,3 +18,18 @@ export function isValidAtbashKey() {
 export function isValidAESKey(key) {
     return typeof key === 'string' && new TextEncoder().encode(key).length === 16;
 }
+
+export function validateKeyForCipher(cipherType, key) {
+    switch(cipherType) {
+        case 'caesar':
+            return isValidCaesarKey(key);
+        case 'vigenere':
+            return isValidVigenereKey(key);
+        case 'atbash':
+            return isValidAtbashKey(key);
+        case 'aes':
+            return isValidAESKey(key);
+        default:
+            return false;
+    }
+}
