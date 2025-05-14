@@ -200,6 +200,9 @@ export default function DeCypherUI() {
                         value={key}
                         onChange={(e) => setKey(e.target.value)}
                     />
+                    {key && !isKeyValid() && (
+                        <div className="warning-text">Warning: Invalid key for {cipher.toUpperCase()} cipher</div>
+                    )}
                 </>
             ) : (
                 <>
@@ -223,6 +226,9 @@ export default function DeCypherUI() {
                         value={key}
                         onChange={(e) => setKey(e.target.value)}
                     />
+                    {key && !isKeyValid() && (
+                        <div className="warning-text">Warning: Invalid key for {cipher.toUpperCase()} cipher</div>
+                    )}
                 </>
             )}
             
