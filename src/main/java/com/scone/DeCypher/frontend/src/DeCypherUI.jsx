@@ -32,6 +32,11 @@ export default function DeCypherUI() {
     };
 
     const handleTextEncrypt = async () => {
+        if (!isKeyValid()) {
+            setResult("Invalid key for selected cipher.");
+            return;
+        }
+
         try {
             const response = await fetch(`${apiUrl}/api/encrypt`, {
                 method: "POST",
@@ -54,6 +59,11 @@ export default function DeCypherUI() {
     };
    
     const handleTextDecrypt = async () => {
+        if (!isKeyValid()) {
+            setResult("Invalid key for selected cipher.");
+            return;
+        }
+        
         try {
             const response = await fetch(`${apiUrl}/api/decrypt`, {
                 method: "POST",
@@ -76,6 +86,11 @@ export default function DeCypherUI() {
     };
 
     const handleFileEncrypt = async () => {
+        if (!isKeyValid()) {
+            setResult("Invalid key for selected cipher.");
+            return;
+        }
+        
         if(!file) {
             setResult("Please select a file to encrypt");
             return;
@@ -113,6 +128,11 @@ export default function DeCypherUI() {
     };
 
     const handleFileDecrypt = async () => {
+        if (!isKeyValid()) {
+            setResult("Invalid key for selected cipher.");
+            return;
+        }
+        
         if(!file) {
             setResult("Please select a file first.");
             return;
