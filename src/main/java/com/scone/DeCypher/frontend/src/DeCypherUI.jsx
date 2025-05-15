@@ -251,12 +251,14 @@ export default function DeCypherUI() {
                 <button 
                     className="encrypt-btn" 
                     onClick={mode === "file" ? handleFileEncrypt : handleTextEncrypt}
+                    disabled={cipher !== "atbash" && !isKeyValid()}
                 >
                     Encrypt
                 </button>
                 <button 
                     className="decrypt-btn" 
                     onClick={mode === "file" ? handleFileDecrypt : handleTextDecrypt}
+                    disabled={cipher !== "atbash" && !isKeyValid()}
                 >
                     Decrypt
                 </button>
