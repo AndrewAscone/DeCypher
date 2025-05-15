@@ -136,7 +136,14 @@ button:disabled {
 .warning-text {
     color: #cc0000;
     font-size: 0.9em;
-    margin-top: 5px;
+    margin-top: 0.5rem;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.warning-text.hidden{
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Responsive Layout */
