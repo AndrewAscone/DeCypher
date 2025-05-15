@@ -93,6 +93,15 @@ h2 {
     font-size: 1rem;
 }
 
+/* Disabled Buttons */
+button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    border: 1px solid #aaa;
+    opacity: 0.7;
+}
+
 /* Encrypt Button Styling */
 .encrypt-btn {
     background-color: #007bff;
