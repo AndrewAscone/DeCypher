@@ -201,11 +201,9 @@ export default function DeCypherUI() {
                         onChange={(e) => setKey(e.target.value)}
                         disabled={cipher === "atbash"}
                     />
-                    {key && !isKeyValid() && (
-                        <p className={`warning-text ${isKeyValid ? "hidden" : ""}`}>
-                            Warning: Invalid key for {cipher.toUpperCase()} cipher
-                        </p>
-                    )}
+                    <p className={`warning-text ${key && !isKeyValid ? "" : "hidden"}`}>
+                        Warning: Invalid key for {cipher.toUpperCase()} cipher
+                    </p>
                 </>
             ) : (
                 <>
@@ -230,11 +228,9 @@ export default function DeCypherUI() {
                         onChange={(e) => setKey(e.target.value)}
                         disabled={cipher === "atbash"}
                     />
-                    {key && !isKeyValid() && (
-                        <p className={`warning-text ${isKeyValid ? "hidden" : ""}`}>
-                            Warning: Invalid key for {cipher.toUpperCase()} cipher
-                        </p>
-                    )}
+                    <p className={`warning-text ${key && !isKeyValid ? "" : "hidden"}`}>
+                        Warning: Invalid key for {cipher.toUpperCase()} cipher
+                    </p>
                 </>
             )}
             
