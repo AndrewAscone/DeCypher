@@ -91,10 +91,12 @@ h2 {
     cursor: pointer;
     border-radius: 4px;
     font-size: 1rem;
+    transition: background-color 0.3s ease, cursor 0.3s ease, opacity 0.3s ease;
 }
 
 /* Disabled Buttons */
-button:disabled {
+.encrypt-btn:disabled,
+.decrypt-btn:disabled {
     background-color: #ccc;
     color: #666;
     cursor: not-allowed;
