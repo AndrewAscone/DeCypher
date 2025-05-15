@@ -199,6 +199,7 @@ export default function DeCypherUI() {
                         placeholder="Enter key"
                         value={key}
                         onChange={(e) => setKey(e.target.value)}
+                        disabled={cipher === "atbash"}
                     />
                     {key && !isKeyValid() && (
                         <div className="warning-text">Warning: Invalid key for {cipher.toUpperCase()} cipher</div>
@@ -225,6 +226,7 @@ export default function DeCypherUI() {
                         placeholder="Enter key"
                         value={key}
                         onChange={(e) => setKey(e.target.value)}
+                        disabled={cipher === "atbash"}
                     />
                     {key && !isKeyValid() && (
                         <div className="warning-text">Warning: Invalid key for {cipher.toUpperCase()} cipher</div>
@@ -235,7 +237,12 @@ export default function DeCypherUI() {
             <select
                 className="dropdown"
                 value={cipher}
-                onChange={(e) => setCipher(e.target.value)}
+                onChange={(e) => {
+                    setCipher(e.target.value);
+                    if (e.target.value === "atbash") {
+                        setKey(""); // clear key when switching to Atbash
+                    }
+                }}
             >
                 <option value="caesar">Caesar Cipher</option>
                 <option value="vigenere">Vigenere Cipher</option>
