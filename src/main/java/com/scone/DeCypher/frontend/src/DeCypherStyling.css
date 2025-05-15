@@ -94,6 +94,14 @@ h2 {
     transition: background-color 0.3s ease, cursor 0.3s ease, opacity 0.3s ease;
 }
 
+.mode-toggle button {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.mode-toggle button.active {
+    transform: scale(1.05);
+}
+
 /* Disabled Buttons */
 .encrypt-btn:disabled,
 .decrypt-btn:disabled {
