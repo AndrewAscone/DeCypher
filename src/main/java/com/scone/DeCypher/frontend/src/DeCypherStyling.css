@@ -167,6 +167,12 @@ h2 {
     pointer-events: none;
 }
 
+.warning-text.visible {
+    max-height: 60px;
+    opacity: 1;
+    margin-top: 0.5rem;
+}
+
 /* Responsive Layout */
 @media (max-width: 480px) {
     .encrypt-btn,
