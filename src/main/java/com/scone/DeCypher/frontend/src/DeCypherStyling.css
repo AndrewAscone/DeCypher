@@ -146,9 +146,15 @@ h2 {
 .warning-text {
     color: #cc0000;
     font-size: 0.9em;
-    margin-top: 0.5rem;
-    opacity: 1;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
     animation: fadeIn 0.3s ease-in-out;
+    transition: 
+        max-height 0.4s ease-in-out,
+        opacity 0.3s ease-in-out,
+        margin-top 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
