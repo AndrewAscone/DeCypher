@@ -12,7 +12,9 @@ export default function DeCypherUI() {
     const [file, setFile] = useState(null);
 
     // === Configuration ===
-    const apiUrl = import.meta.env.VITE_API_BASE_URL;
+    const apiUrl = import.meta.env.MODE === 'development'
+        ? ''
+        : import.meta.env.VITE_API_BASE_URL;
 
     const isKeyValid = () => {
         return cipherValidators.validateKeyForCipher(cipher, key);
