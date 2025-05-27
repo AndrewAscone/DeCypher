@@ -1,5 +1,5 @@
 # ---------- Frontend Build ----------
-FROM node:20 AS frontend-builder
+FROM node:20-slim AS frontend-builder
 
 WORKDIR /app
 
