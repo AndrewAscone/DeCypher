@@ -21,6 +21,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY .mvn .mvn
 COPY mvnw mvnw
+RUN chmod +x mvnw
 RUN ./mvnw dependency:resolve
 
 # Copy rest of the backend source
