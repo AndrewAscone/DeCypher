@@ -42,4 +42,4 @@ WORKDIR /app
 COPY --from=backend-builder /app/target/*.jar app.jar
 
 # Run the JAR
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "app.jar"]
