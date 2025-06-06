@@ -6,6 +6,31 @@ public class ChainedCipherRequest {
     private String text;
     private List<CipherStep> steps;
 
+    public ChainedCipherRequest() {
+
+    }
+
+    public ChainedCipherRequest(String text, List<CipherStep> steps) {
+        this.text = text;
+        this.steps = steps;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public List<CipherStep> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<CipherStep> steps) {
+        this.steps = steps;
+    }
+
     public static class CipherStep {
         private String cipher;
         private String key;
