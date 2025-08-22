@@ -3,8 +3,10 @@ package com.scone.DeCypher.backend.service;
 import com.scone.DeCypher.backend.cipher.CipherFactory;
 import com.scone.DeCypher.backend.cipher.EncryptionCipher;
 import com.scone.DeCypher.backend.model.ChainedCipherRequest;
+import com.scone.DeCypher.backend.model.ChainedCipherRequest.CipherStep;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class CipherService {
     public String encryptChained(ChainedCipherRequest request) {
         String result = request.getText();
 
-        for(ChainedCipherRequest.CipherStep step : request.getSteps()) {
+        for(CipherStep step : request.getSteps()) {
             EncryptionCipher cipher = cipherFactory.getCipher(step.getCipher(), step.getKey());
             result = cipher.encrypt(result);
         }
@@ -39,10 +41,10 @@ public class CipherService {
     public String decryptChained(ChainedCipherRequest request) {
         String result = request.getText();
 
-        List<ChainedCipherRequest.CipherStep> reversedSteps = request.getSteps();
+        List<CipherStep> reversedSteps = new ArrayList<>(request.getSteps());
         Collections.reverse(reversedSteps);
 
-        for(ChainedCipherRequest.CipherStep step : reversedSteps) {
+        for(CipherStep step : reversedSteps) {
             EncryptionCipher cipher = cipherFactory.getCipher(step.getCipher(), step.getKey());
             result = cipher.decrypt(result);
         }
