@@ -1,5 +1,6 @@
 package com.scone.DeCypher.backend.controller;
 
+import com.scone.DeCypher.backend.model.ChainedCipherRequest;
 import com.scone.DeCypher.backend.model.EncryptionRequest;
 import com.scone.DeCypher.backend.model.EncryptionResponse;
 import com.scone.DeCypher.backend.service.CipherService;
@@ -29,5 +30,17 @@ public class CipherController {
     public ResponseEntity<EncryptionResponse> decrypt(@RequestBody EncryptionRequest request){
         String result = cipherService.decrypt(request.getText(), request.getCipher(), request.getKey());
         return ResponseEntity.ok(new EncryptionResponse(result, request.getCipher()));
+    }
+
+    @PostMapping("/encrypt-chained")
+    public ResponseEntity<String> encryptChained(@RequestBody ChainedCipherRequest request) {
+        String result = cipherService.encryptChained(request);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/decrypt-chanined")
+    public ResponseEntity<String> decryptChained(@RequestBody ChainedCipherRequest request) {
+        String result = cipherService.decryptChained(request);
+        return ResponseEntity.ok(result);
     }
 }
