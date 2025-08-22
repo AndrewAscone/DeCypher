@@ -38,7 +38,7 @@ public class CipherController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/decrypt-chanined")
+    @PostMapping("/decrypt-chained")
     public ResponseEntity<String> decryptChained(@RequestBody ChainedCipherRequest request) {
         String result = cipherService.decryptChained(request);
         return ResponseEntity.ok(result);
