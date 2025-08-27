@@ -37,6 +37,13 @@ public class FileEncryptionController {
     }
 
     private ResponseEntity<Resource> processAndRespond(MultipartFile file, String cipherName, String key, boolean encrypt) throws IOException {
+        // Restrict to AES only
+        if(!"AES".equalsIgnoreCase(cipherName)){
+            return ResponseEntity.badRequest()
+                    .header(HttpHeaders.CONTENT_TYPE, "text/plain")
+                    .body(null); // no file in response
+        }
+
         File processedFile = fileEncryptionService.processFile(file, cipherName, key, encrypt);
         String prefix = encrypt ? "encrypted_" : "decrypted_";
 
