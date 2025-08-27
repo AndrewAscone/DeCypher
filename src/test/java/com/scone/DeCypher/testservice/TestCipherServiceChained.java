@@ -39,21 +39,55 @@ public class TestCipherServiceChained {
 
     @Test
     void testSingleStepCaesar(){
+        ChainedCipherRequest request = new ChainedCipherRequest("HELLO",
+                List.of(new CipherStep("CAESAR", "3")));
 
+        String encrypted = cipherService.encryptChained(request);
+        String decrypted = cipherService.decryptChained(new ChainedCipherRequest(encrypted, request.getSteps()));
+
+        assertEquals("HELLO", decrypted);
     }
 
     @Test
     void testMultipleStepsCaesarAtbash(){
+        ChainedCipherRequest request = new ChainedCipherRequest("HELLO", List.of(
+                new CipherStep("CAESAR", "3"),
+                new CipherStep("ATBASH", "")
+        ));
 
+        String encrypted = cipherService.encryptChained(request);
+        String decrypted = cipherService.decryptChained(new ChainedCipherRequest(encrypted, request.getSteps()));
+
+        assertEquals("HELLO", decrypted);
     }
 
     @Test
     void testOrderMatters(){
+        ChainedCipherRequest request1 = new ChainedCipherRequest("HELLO", List.of(
+                new CipherStep("CAESAR", "2"),
+                new CipherStep("VIGENERE", "KEY")
+        ));
 
+        String encrypted1 = cipherService.encryptChained(request1);
+
+        ChainedCipherRequest request2 = new ChainedCipherRequest("HELLO", List.of(
+                new CipherStep("VIGENERE", "KEY"),
+                new CipherStep("CAESAR", "2")
+        ));
+
+        String encrypted2 = cipherService.encryptChained(request2);
+
+        assertNotEquals(encrypted1, encrypted2, "Changing cipher order should change output");
     }
 
     @Test
     void testEmptyStepsReturnsOriginalText(){
+        ChainedCipherRequest request = new ChainedCipherRequest("HELLO", List.of());
 
+        String encrypted = cipherService.encryptChained(request);
+        String decrypted = cipherService.decryptChained(new ChainedCipherRequest(encrypted, request.getSteps()));
+
+        assertEquals("HELLO", encrypted);
+        assertEquals("HELLO", decrypted);
     }
 }
