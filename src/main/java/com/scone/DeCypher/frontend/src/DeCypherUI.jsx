@@ -240,6 +240,15 @@ export default function DeCypherUI() {
                 className="dropdown"
                 value={cipher}
                 onChange={(e) => {
+                    const selectedCipher = e.target.value;
+
+                    // Prevent non-AES selection in file mode
+                    if(mode === "file" && selectedCipher !== "aes"){
+                        alert("Only AES is supported for file encryption.");
+                        setCipher("aes"); // force selection back to AES
+                        return;
+                    }
+                    
                     setCipher(e.target.value);
                     if (e.target.value === "atbash") {
                         setKey(""); // clear key when switching to Atbash
