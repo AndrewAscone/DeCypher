@@ -63,16 +63,16 @@ public class TestCipherServiceChained {
 
     @Test
     void testOrderMatters(){
-        ChainedCipherRequest request1 = new ChainedCipherRequest("HELLO", List.of(
-                new CipherStep("CAESAR", "2"),
-                new CipherStep("VIGENERE", "KEY")
+        ChainedCipherRequest request1 = new ChainedCipherRequest("WORLD", List.of(
+                new CipherStep("CAESAR", "5"),
+                new CipherStep("ATBASH", "")
         ));
 
         String encrypted1 = cipherService.encryptChained(request1);
 
-        ChainedCipherRequest request2 = new ChainedCipherRequest("HELLO", List.of(
-                new CipherStep("VIGENERE", "KEY"),
-                new CipherStep("CAESAR", "2")
+        ChainedCipherRequest request2 = new ChainedCipherRequest("WORLD", List.of(
+                new CipherStep("ATBASH", ""),
+                new CipherStep("CAESAR", "5")
         ));
 
         String encrypted2 = cipherService.encryptChained(request2);

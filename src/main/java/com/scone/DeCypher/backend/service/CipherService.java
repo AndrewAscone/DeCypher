@@ -33,6 +33,7 @@ public class CipherService {
         for(CipherStep step : request.getSteps()) {
             EncryptionCipher cipher = cipherFactory.getCipher(step.getCipher(), step.getKey());
             result = cipher.encrypt(result);
+            System.out.printf("Applying %s with key=%s to %s%n", step.getCipher(), step.getKey(), result);
         }
 
         return result;
